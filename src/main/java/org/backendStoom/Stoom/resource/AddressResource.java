@@ -1,7 +1,9 @@
-package org.backendStoom.Stoom.entity;
+package org.backendStoom.Stoom.resource;
 
 import java.util.List;
 
+import org.backendStoom.Stoom.entity.Address;
+import org.backendStoom.Stoom.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
