@@ -19,3 +19,7 @@ Veja um exemplo de uma requisição sem as informações:
 
 - Também foi utilizado o JUnit para realização dos testes unitarios.
 Os testes podem ser executados dentro do projeto.
+
+![alt text](https://i.imgur.com/iMDCyk6.png)
+
+![alt text](https://i.imgur.com/y7M1lmS.png)
