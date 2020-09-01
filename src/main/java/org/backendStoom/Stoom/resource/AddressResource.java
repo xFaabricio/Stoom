@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.backendStoom.Stoom.entity.Address;
 import org.backendStoom.Stoom.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,24 +38,29 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = "*")
 public class AddressResource {
 
+	private static final Logger logger = LogManager.getLogger(AddressResource.class);
+	
 	@Autowired
 	AddressRepository addressRepository;
 
 	@GetMapping("/addresses")
 	@ApiOperation(value = "Returns a list of all addresses")
 	public List<Address> findAll() {
+		logger.info("Retornando lista de Endereços");
 		return addressRepository.findAll();
 	}
 
 	@GetMapping("/address/{id}")
 	@ApiOperation(value = "Returns a single address")
 	public Address findById(@PathVariable(value = "id") long id) {
+		logger.info("Retornando o endereço de id " +id);
 		return addressRepository.findById(id);
 	}
 
 	@PostMapping("/address")
 	@ApiOperation(value = "Create a new address register")
 	public Address save(@RequestBody Address address) {
+		logger.info("Criando o novo Endereço");
 		setAddressLatitudeAndLongitude(address);
 		return addressRepository.save(address);
 	}
@@ -61,12 +68,14 @@ public class AddressResource {
 	@DeleteMapping("/address")
 	@ApiOperation(value = "Deletes an address record")
 	public void delete(@RequestBody Address address) {
+		logger.info("Deletando o Endereço");
 		addressRepository.delete(address);
 	}
 
 	@PutMapping("/address")
 	@ApiOperation(value = "Updates an address register")
 	public Address update(@RequestBody Address address) {
+		logger.info("Atualizando o endereço");
 		return addressRepository.save(address);
 	}
 
@@ -76,6 +85,9 @@ public class AddressResource {
 		if (address.getLatitude() == null || address.getLongitude() == null || address.getLatitude().equals("")
 				|| address.getLongitude().equals("")) {
 
+			logger.info("Identificado endereço sem Longitude e Latidude");
+			logger.info("Buscando informações...");
+			
 			String searchLatitudeAndLongitude = "";
 			int countInformation = 0;
 
@@ -162,16 +174,16 @@ public class AddressResource {
 		        JsonObject latitudeAndLongitude = jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject();
 		        		        
 		        latitudeAndLongitude.get("lat");
-		        latitudeAndLongitude.get("lng");
-		        
-				System.out.println(latitudeAndLongitude.get("lat"));
-				System.out.println(latitudeAndLongitude.get("lng"));
+		        latitudeAndLongitude.get("lng");		      
+				
+				logger.info("Informações encontradas, Latitude: " + latitudeAndLongitude.get("lat") + " Longitude: " + latitudeAndLongitude.get("lng"));
 				
 				address.setLatitude(latitudeAndLongitude.get("lat").getAsString());
 				address.setLongitude(latitudeAndLongitude.get("lng").getAsString());
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				logger.fatal("Erro ao se comunicar com API Google Geocoding ");
 				returnError();
 				return null;
 			} finally {

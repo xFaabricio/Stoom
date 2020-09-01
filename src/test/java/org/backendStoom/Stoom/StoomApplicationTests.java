@@ -8,8 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.InputStream;
-import java.nio.charset.Charset;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.backendStoom.Stoom.resource.AddressResource;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,9 +28,8 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 public class StoomApplicationTests {
 
-//	@Test
-//	void contextLoads() {
-//	}
+	
+	private static final Logger logger = LogManager.getLogger(StoomApplicationTests.class);
 	
 	@Autowired
 	private WebApplicationContext webApplicationContext;
