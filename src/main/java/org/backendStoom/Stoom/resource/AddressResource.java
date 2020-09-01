@@ -11,6 +11,8 @@ import java.util.List;
 import org.backendStoom.Stoom.entity.Address;
 import org.backendStoom.Stoom.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/rest")
+@RequestMapping(value = "/")
 @Api(value = "API Rest Address")
 @CrossOrigin(origins = "*")
 public class AddressResource {
@@ -45,14 +47,32 @@ public class AddressResource {
 
 	@GetMapping("/address/{id}")
 	@ApiOperation(value = "Returns a single address")
-	public Address findAddressById(@PathVariable(value = "id") long id) {
+	public Address findById(@PathVariable(value = "id") long id) {
 		return addressRepository.findById(id);
 	}
 
 	@PostMapping("/address")
 	@ApiOperation(value = "Create a new address register")
-	public Address saveAddress(@RequestBody Address address) {
+	public Address save(@RequestBody Address address) {
+		setAddressLatitudeAndLongitude(address);
+		return addressRepository.save(address);
+	}
 
+	@DeleteMapping("/address")
+	@ApiOperation(value = "Deletes an address record")
+	public void delete(@RequestBody Address address) {
+		addressRepository.delete(address);
+	}
+
+	@PutMapping("/address")
+	@ApiOperation(value = "Updates an address register")
+	public Address update(@RequestBody Address address) {
+		return addressRepository.save(address);
+	}
+
+	
+	public Address setAddressLatitudeAndLongitude(Address address) {
+		
 		if (address.getLatitude() == null || address.getLongitude() == null || address.getLatitude().equals("")
 				|| address.getLongitude().equals("")) {
 
@@ -136,7 +156,6 @@ public class AddressResource {
 					response.append('\r');
 				}
 				rd.close();
-//				System.out.println(response.toString());
 				
 				JsonElement jsonElement = new JsonParser().parse(response.toString());		        
 		        JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -153,6 +172,7 @@ public class AddressResource {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				returnError();
 				return null;
 			} finally {
 				if (connection != null) {
@@ -162,19 +182,12 @@ public class AddressResource {
 
 		}
 
-		return addressRepository.save(address);
+		return address;
+		
 	}
-
-	@DeleteMapping("/address")
-	@ApiOperation(value = "Deletes an address record")
-	public void deleteAddress(@RequestBody Address address) {
-		addressRepository.delete(address);
+	
+	public ResponseEntity<?> returnError() {
+	    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
-	@PutMapping("/address")
-	@ApiOperation(value = "Updates an address register")
-	public Address updateAddress(@RequestBody Address address) {
-		return addressRepository.save(address);
-	}
-
+	
 }

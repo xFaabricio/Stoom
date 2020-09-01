@@ -48,7 +48,7 @@ public class StoomApplicationTests {
 	}
 	
 	public String getPath() {
-		return "http://localhost:8080/rest";
+		return "http://localhost:8080";
 	}
 	
 	@Test
