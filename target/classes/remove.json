@@ -1,0 +1,13 @@
+{
+    "id": 23,
+    "streetName": "Avenida Reserva do Japy",
+    "number": 360,
+    "complement": "Apartamento 202 Bloco 1",
+    "neighbourhood": "Gramadao",
+    "city": "Jundiai",
+    "state": "Sao Paulo",
+    "country": "Brasil",
+    "zipcode": "13211-772",
+    "latitude": "-23.1839787",
+    "longitude": "-46.9259601"
+}
