@@ -43,6 +43,11 @@ public class AddressResource {
 	@Autowired
 	AddressRepository addressRepository;
 
+	/**
+	 * Este metodo tem como objetivo retornar todos endereços cadastrados
+	 * 
+	 * */
+	
 	@GetMapping("/addresses")
 	@ApiOperation(value = "Returns a list of all addresses")
 	public List<Address> findAll() {
@@ -50,6 +55,12 @@ public class AddressResource {
 		return addressRepository.findAll();
 	}
 
+	/**
+	 * Este metodo tem como objetivo um endereço cadastrado,
+	 * sendo retornado o endereço em que foi informado o id como parametro.
+	 * 
+	 * */
+	
 	@GetMapping("/address/{id}")
 	@ApiOperation(value = "Returns a single address")
 	public Address findById(@PathVariable(value = "id") long id) {
@@ -57,6 +68,11 @@ public class AddressResource {
 		return addressRepository.findById(id);
 	}
 
+	/**
+	 * Este metodo tem como objetivo 
+	 * de realizar o cadastro de um endereço
+	 * */
+	
 	@PostMapping("/address")
 	@ApiOperation(value = "Create a new address register")
 	public Address save(@RequestBody Address address) {
@@ -65,6 +81,11 @@ public class AddressResource {
 		return addressRepository.save(address);
 	}
 
+	/**
+	 * Este metodo tem como objetivo 
+	 * de apagar um endereço
+	 * */
+	
 	@DeleteMapping("/address")
 	@ApiOperation(value = "Deletes an address record")
 	public void delete(@RequestBody Address address) {
@@ -72,6 +93,11 @@ public class AddressResource {
 		addressRepository.delete(address);
 	}
 
+	/**
+	 * Este metodo tem como objetivo 
+	 * de atualizar endereço
+	 * */
+	
 	@PutMapping("/address")
 	@ApiOperation(value = "Updates an address register")
 	public Address update(@RequestBody Address address) {
@@ -79,6 +105,13 @@ public class AddressResource {
 		return addressRepository.save(address);
 	}
 
+	/**
+	 * Este metodo tem como objetivo 
+	 * de pesquisar a latitude e longitude quando
+	 * não informado os valores latitude e longitude na criação
+	 * 
+	 * A pesquisa é feita com o Google Geocoding API
+	 * */
 	
 	public Address setAddressLatitudeAndLongitude(Address address) {
 		
