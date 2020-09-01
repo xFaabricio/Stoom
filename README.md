@@ -24,6 +24,12 @@ Os testes podem ser executados dentro do projeto.
 
 ![alt text](https://i.imgur.com/y7M1lmS.png)
 
+- Foi implementado o Log4j2 para adicionar informações/problemas na aplicação
+
+Veja um exemplo
+
+![alt text](https://i.imgur.com/CDUw8vv.png)
+
 # Dockerfile
 
 Também existe o dockerfile para subir sua aplicação utilizando Docker.
