@@ -1,12 +1,9 @@
 {
-    "streetName": "Teste ABC",
-    "number": 123,
-    "complement": "TESTE ABC",
-    "neighbourhood": "TESTE 1",
-    "city": "TESTE 1",
-    "state": "TESTE 1",
-    "country": "TESTE 1",
-    "zipcode": "13212-773",
-    "latitude": "45132154",
-    "longitude": "5465135"
+    "streetName": "Avenida Reserva do Japy",
+    "complement": "Apartamento 202 Bloco 1",
+    "neighbourhood": "Gramadão",
+    "city": "Jundiaí",
+    "state": "São Paulo",
+    "country": "Brasil",
+    "zipcode": "13211-772"
 }

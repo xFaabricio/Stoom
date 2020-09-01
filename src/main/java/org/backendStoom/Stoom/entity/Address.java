@@ -24,28 +24,28 @@ public class Address implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
-	@Column(name="STREETNAME")
+	@Column(name="STREETNAME", nullable=false)
 	String streetName;
 	
-	@Column(name="NUMBER")
+	@Column(name="NUMBER", nullable=false)
 	Long number;
 	
 	@Column(name="COMPLEMENT")
 	String complement;
 	
-	@Column(name="NEIGHBOURHOOD")
+	@Column(name="NEIGHBOURHOOD", nullable=false)
 	String neighbourhood;
 	
-	@Column(name="CITY")
+	@Column(name="CITY", nullable=false)
 	String city;
 	
-	@Column(name="STATE")
+	@Column(name="STATE", nullable=false)
 	String state;
 	
-	@Column(name="COUNTRY")
+	@Column(name="COUNTRY", nullable=false)
 	String country;
 	
-	@Column(name="ZIPCODE")
+	@Column(name="ZIPCODE", nullable=false)
 	String zipcode;
 	
 	@Column(name="LATITUDE")
