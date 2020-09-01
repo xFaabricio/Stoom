@@ -34,8 +34,6 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = "*")
 public class AddressResource {
 
-	// https://maps.googleapis.com/maps/api/geocode/json?address=&key=AIzaSyAR0Gg1As2fFuhfF7Z_n6ors5eQZC1nAnI
-
 	@Autowired
 	AddressRepository addressRepository;
 
