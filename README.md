@@ -23,3 +23,20 @@ Os testes podem ser executados dentro do projeto.
 ![alt text](https://i.imgur.com/iMDCyk6.png)
 
 ![alt text](https://i.imgur.com/y7M1lmS.png)
+
+# Dockerfile
+
+Também existe o dockerfile para subir sua aplicação utilizando Docker.
+1. É necessário realizar um Maven install utilizando a seguinte opção:
+
+![alt text](https://i.imgur.com/amk7WqG.png)
+
+2. Dentro do docker rodar o comando 
+> "docker build -t stoom.jar"
+
+3. Executar o comando abaixo para listar as imagens
+> "docker image ls"
+
+4. Por fim, executar o comando para iniciar o docker
+> "docker run -p 9090:8080 stoom.jar"
+
