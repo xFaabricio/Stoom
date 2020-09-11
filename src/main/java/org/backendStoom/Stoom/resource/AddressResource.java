@@ -113,6 +113,7 @@ public class AddressResource {
 	 * A pesquisa é feita com o Google Geocoding API
 	 * */
 	
+	@SuppressWarnings("deprecation")
 	public Address setAddressLatitudeAndLongitude(Address address) {
 		
 		if (address.getLatitude() == null || address.getLongitude() == null || address.getLatitude().equals("")
@@ -204,16 +205,28 @@ public class AddressResource {
 				
 				JsonElement jsonElement = new JsonParser().parse(response.toString());		        
 		        JsonObject jsonObject = jsonElement.getAsJsonObject();
-		        JsonObject latitudeAndLongitude = jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject();
+		        
+		        if(jsonObject.get("results") != null &&
+		        		jsonObject.get("results").getAsJsonArray() != null &&
+		        		jsonObject.get("results").getAsJsonArray().get(0) != null &&
+		        		jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject() != null &&
+		        		jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry") != null &&
+		        		jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject() != null &&
+		        		jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location") != null &&
+		        		jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject() != null) {
+		        	
+		        	JsonObject latitudeAndLongitude = jsonObject.get("results").getAsJsonArray().get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("location").getAsJsonObject();
+		        
+		        	latitudeAndLongitude.get("lat");
+			        latitudeAndLongitude.get("lng");		      
+					
+					logger.info("Informações encontradas, Latitude: " + latitudeAndLongitude.get("lat") + " Longitude: " + latitudeAndLongitude.get("lng"));
+					
+					address.setLatitude(latitudeAndLongitude.get("lat").getAsString());
+					address.setLongitude(latitudeAndLongitude.get("lng").getAsString());
+					
+		        }
 		        		        
-		        latitudeAndLongitude.get("lat");
-		        latitudeAndLongitude.get("lng");		      
-				
-				logger.info("Informações encontradas, Latitude: " + latitudeAndLongitude.get("lat") + " Longitude: " + latitudeAndLongitude.get("lng"));
-				
-				address.setLatitude(latitudeAndLongitude.get("lat").getAsString());
-				address.setLongitude(latitudeAndLongitude.get("lng").getAsString());
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.fatal("Erro ao se comunicar com API Google Geocoding ");

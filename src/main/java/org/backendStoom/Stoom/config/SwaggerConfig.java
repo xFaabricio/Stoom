@@ -29,7 +29,8 @@ public class SwaggerConfig {
                 .apiInfo(metaInfo());
     }
 
-    private ApiInfo metaInfo() {
+    @SuppressWarnings("rawtypes")
+	private ApiInfo metaInfo() {
 
         ApiInfo apiInfo = new ApiInfo(
                 "Addresses API REST",

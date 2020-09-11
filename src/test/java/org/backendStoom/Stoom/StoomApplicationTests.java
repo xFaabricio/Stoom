@@ -29,6 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
 public class StoomApplicationTests {
 
 	
+	@SuppressWarnings("unused")
 	private static final Logger logger = LogManager.getLogger(StoomApplicationTests.class);
 	
 	@Autowired
