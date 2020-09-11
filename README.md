@@ -18,6 +18,12 @@ Veja um exemplo de uma requisição sem as informações:
 ![alt text](https://i.imgur.com/nCzhUfr.png)
 
 - Também foi utilizado o JUnit para realização dos testes unitarios.
+
+Após fazer um clone do projeto configure o JUnit da seguinte maneira
+ > Properties -> Java Build Path -> Libraries -> Add Library -> JUnit -> Junit 4
+ 
+ ![alt text](https://i.imgur.com/JS9cAm5.png)
+
 Os testes podem ser executados dentro do projeto.
 
 ![alt text](https://i.imgur.com/iMDCyk6.png)
